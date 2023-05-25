@@ -37,17 +37,102 @@ function OneRound(PlayerChoice,ComputerChoice)
 
     if((PlayerChoice == rock && ComputerChoice == scissors) || (PlayerChoice == paper && ComputerChoice == rock) || (PlayerChoice == scissors && ComputerChoice == paper))
     {
-        console.log("player wins !!!");
+        return (["player wins !!!",1]);
     }
     else if ((PlayerChoice == rock && ComputerChoice == rock) || (PlayerChoice == paper && ComputerChoice == paper) || (PlayerChoice == scissors && ComputerChoice == scissors)){
-        console.log("same choices")
+        return (["same choices",2]);
     }
     else 
     {
-        console.log("computer wins x__x ");
+        return (["computer wins x__x ",0]);
     }
 }
 
-OneRound(getPlayerChoice(),getComputerChoice());
+const rock = document.querySelector('#r');
+const paper = document.querySelector('#p');
+const scissor = document.querySelector('#s');
+let result = [];
+const dashbord = document.querySelector('#dashbord');
+let h2 = document.createElement('h2');
+let score = document.createElement('h4');
+
+dashbord.appendChild(h2);
+dashbord.appendChild(score);
+
+let scorePlayer = 0;
+let scoreComputer = 0;
+score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+
+
+rock.addEventListener('click',()=>{
+    if(scoreComputer == 5 || scorePlayer == 5)
+    {
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+        h2.textContent = "GAME OVER";
+    }
+    else 
+    {
+
+    
+        result = OneRound('R',getComputerChoice());
+        h2.textContent = result[0];
+        if(result[1] == 0)
+            scoreComputer = scoreComputer + 1;
+        else if (result[1] == 1)
+            scorePlayer = scorePlayer + 1;
+        
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+    }
+});
+
+scissor.addEventListener('click',()=>{
+    if(scoreComputer == 5 || scorePlayer == 5)
+    {
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+        h2.textContent = "GAME OVER";
+    }
+    else 
+    {
+
+        result = OneRound('S',getComputerChoice());    
+        h2.textContent = result[0];
+        if(result[1] == 0)
+            scoreComputer = scoreComputer + 1;
+        else if (result[1] == 1)
+            scorePlayer = scorePlayer + 1;
+        
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+    }
+});
+
+paper.addEventListener('click',()=>{
+
+    if(scoreComputer == 5 || scorePlayer == 5)
+    {
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+        h2.textContent = "GAME OVER";
+    }
+    else 
+    {
+
+        result = OneRound('P',getComputerChoice());
+        h2.textContent = result[0];
+        if(result[1] == 0)
+            scoreComputer = scoreComputer + 1;
+        else if (result[1] == 1)
+            scorePlayer = scorePlayer + 1;
+
+        score.textContent = "Player : "+ scorePlayer + ", Computer : "+scoreComputer;
+    }
+});
+
+
+
+
+
+// const div = document.createElement('div');
+// div.classList.add('dashbord');
+
+
 // console.log("computer choice is : ",getComputerChoice());
 // console.log("player choice is : ",getPlayerChoice());
